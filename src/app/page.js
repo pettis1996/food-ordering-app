@@ -1,4 +1,3 @@
-import Header from "@/components/layout/Header";
 import Hero from "@/components/layout/Hero";
 import HomeMenu from "@/components/layout/HomeMenu";
 import SectionHeader from "@/components/layout/SectionHeader";
@@ -6,7 +5,6 @@ import SectionHeader from "@/components/layout/SectionHeader";
 export default function Home() {
   return (
     <>
-      <Header />
       <Hero />
       <HomeMenu />
       <section>
@@ -41,10 +39,6 @@ export default function Home() {
           <a className="text-4xl text-gray-400 hover:text-gray-600 hover:underline" href="tel:+35799123124">+357 99 123 124</a>
         </div>
       </section>
-      <footer className="border-t p-8 text-center text-gray-500 mt-16">
-        &copy; 2023 - All rights reserved <br />
-        Created by Pettis Dev.
-      </footer>
     </>
   )
 }
