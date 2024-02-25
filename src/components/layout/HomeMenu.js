@@ -1,5 +1,6 @@
 import Image from "next/image"
 import MenuItem from "../menu/MenuItem";
+import SectionHeader from "./SectionHeader";
 
 const menuItems = { 
     1: {
@@ -37,7 +38,7 @@ const menuItems = {
 export default function HomeMenu() {
     return (
         <section className="">
-            <div className="absolute h-full left-0 right-0">
+            <div className="absolute left-0 right-0">
                 <div className="h-44 w-48 absolute -left-12 -top-[95px] -z-10">
                     <Image src={"/sallad1.png"} layout={"fill"} objectFit={"contain"} alt={"Salad 1"} />
                 </div>
@@ -45,10 +46,7 @@ export default function HomeMenu() {
                     <Image src={"/sallad2.png"} layout={"fill"} objectFit={"contain"} alt={"Salad 2"} />
                 </div>
             </div>
-            <div className="text-center py-4"> 
-                <h3 className="uppercase text-gray-600 font-semibold leading-4">Check Out</h3>
-                <h2 className="text-primary font-bold text-4xl italic">Menu</h2>
-            </div>
+            <SectionHeader subHeader={"Check Out our New"} mainHeader={"Menu"} />
             <div className="grid grid-cols-3 gap-4">
                 {Object.values(menuItems).map((item, index) => {
                     return (

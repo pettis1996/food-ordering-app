@@ -2,8 +2,10 @@ import Image from "next/image"
 
 export default function MenuItem() {
     return (
-        <div className="bg-gray-200 p-4 rounded-lg text-center">
-            <Image src={"/pizza.png"} width={400} height={150} alt={"Pizza"} />
+        <div className="bg-gray-200 p-4 rounded-lg text-center hover:bg-white hover:shadow-md hover:shadow-black/25 transition-all">
+            <div className="text-center">
+                <Image className="block mx-auto" src={"/pizza.png"} width={100} height={100} alt={"Pizza"} />
+            </div>
             <h4 className="font-semibold text-xl my-3">Pepperoni Pizza</h4>
             <p className="text-gray-500 text-sm">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
