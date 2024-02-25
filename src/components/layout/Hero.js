@@ -11,10 +11,10 @@ export default function Hero() {
                 </p>
                 <div className="flex gap-4 text-sm">
                     <button className="bg-primary text-white flex items-center gap-2 rounded-full px-4 py-2">
-                        Order Now
+                        Order Now   
                         <Right />
                     </button>
-                    <button className="flex items-center gap-2 py-2 text-gray-600 font-semibold">
+                    <button className="flex items-center gap-2 py-2 text-gray-600 rounded-full font-semibold border-0">
                         Learn More
                         <Right />    
                     </button>
