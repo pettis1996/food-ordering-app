@@ -1,11 +1,21 @@
 import { User } from "@/app/models/User";
-import mongoose from "mongoose";
+import { connectMongoDB } from "../../../../lib/mongodb";
 
 export async function POST(req) {
-    const body = await req.json();
-    console.log("here")
-    console.log("body", body)
-    mongoose.connect(process.env.MONGO_URL);
-    const createdUser = await User.create(body);
-    return Response.json(createdUser);
+    const { email, password } = await req.json();
+    const userDetails = { email, password }
+    try {
+        await connectMongoDB();
+        const createdUser = await User.create(userDetails);
+        return Response.json(
+            { message: "User Registered Successfully." },
+            { status: 201 }
+        );
+    } catch(error) {
+        return Response.json(
+            { message: "An error occured while registering this user." },
+            { status: 500 }
+        );
+    }
+
 }
