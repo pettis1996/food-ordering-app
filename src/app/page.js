@@ -9,7 +9,7 @@ export default function Home() {
       <HomeMenu />
       <section>
         <SectionHeader subHeader={"Our story"} mainHeader={"About Us"} />
-        <div className="max-w-2xl mx-auto text-gray-500 mt-4 flex flex-col gap-4">
+        <div id="about" className="max-w-2xl mx-auto text-gray-500 mt-4 flex flex-col gap-4">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
             Praesent ut dapibus dolor. Nulla feugiat, lectus ac blandit lobortis, 
@@ -33,7 +33,7 @@ export default function Home() {
           </p>
         </div>
       </section>
-      <section className="text-center">
+      <section id="contact" className="text-center">
         <SectionHeader subHeader={"Got any questions?"} mainHeader={"Contact Us"} />
         <div className="mt-8">
           <a className="text-4xl text-gray-400 hover:text-gray-600 hover:underline" href="tel:+35799123124">+357 99 123 124</a>

@@ -9,6 +9,7 @@ export default function RegisterPage() {
     const [password, setPassword] = useState("");
     const [creatingUser, setCreatingUser] = useState(false);
     const [userCreated, setUserCreated] = useState(false);
+    const [redirectSeconds, setRedirectSeconds] = useState(5);
 
     async function handleFormSubmit(ev) {
         ev.preventDefault();
@@ -25,7 +26,17 @@ export default function RegisterPage() {
         }
         setUserCreated(true);
         setCreatingUser(false);
-        router.push("/");
+        setTimeout(() => {
+            const interval = setInterval(() => {
+                console.log(redirectSeconds);
+                if (redirectSeconds > 0) {
+                    setRedirectSeconds(redirectSeconds - 1);
+                } else {
+                    clearInterval(interval);
+                    router.push("/");
+                }
+            }, 1000)
+        }, 1000);
     };
 
     return (
