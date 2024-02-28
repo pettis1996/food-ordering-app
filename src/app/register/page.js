@@ -1,18 +1,31 @@
 "use client"
-import Image from "next/image"
+import { useRouter } from 'next/navigation'
+import Image from "next/image";
 import { useState } from "react";
 
 export default function RegisterPage() {
+    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [creatingUser, setCreatingUser] = useState(false);
+    const [userCreated, setUserCreated] = useState(false);
 
-    function handleFormSubmit(ev) {
+    async function handleFormSubmit(ev) {
         ev.preventDefault();
-        fetch("/api/register", {
+        setCreatingUser(true);
+        setUserCreated(false);
+        const res = await fetch("/api/register", {
             method: "POST",
             body: JSON.stringify({email, password}),
             headers: {"Content-Type": "application/json"}
         });
+        if (!res.ok) {
+            console.log(res.status);
+            return null;
+        }
+        setUserCreated(true);
+        setCreatingUser(false);
+        router.push("/");
     };
 
     return (
