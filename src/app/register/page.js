@@ -17,31 +17,22 @@ export default function RegisterPage() {
         setCreatingUser(true);
         setUserCreated(false);
         setUserExists(false);
-        try{
-            const res = await fetch("/api/register", {
-                method: "POST",
-                body: JSON.stringify({email, password}),
-                headers: {"Content-Type": "application/json"}
-            });
-
-            // TODO: handle the error if the user already exists :: Returns 500 Internal Server Error
-
-            if (!res.ok) {
-                console.log(res.statusText);
-                setCreatingUser(false);
-                setUserExists(true);
-                return null;
-            }
-            setUserCreated(true);
-            setTimeout(() => {
-                setCreatingUser(false);
-                router.push("/");
-            }, 1750);
-        } catch (error) { 
-            console.log(error);
-            setCreatingUser(true);
-            return null;
+        const res = await fetch("/api/register", {
+            method: "POST",
+            body: JSON.stringify({email, password}),
+            headers: {"Content-Type": "application/json"}
+        });
+        if (!res.ok) {
+            console.log(res.statusText);
+            setCreatingUser(false);
+            setUserExists(true);
+            return;
         }
+        setUserCreated(true);
+        setTimeout(() => {
+            setCreatingUser(false);
+            router.push("/");
+        }, 1750);
     };
 
     return (

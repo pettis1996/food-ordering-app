@@ -4,8 +4,6 @@ import { connectMongoDB } from "../../../../lib/mongodb";
 export async function POST(req) {
     const { email, password } = await req.json();
     const userDetails = { email, password }
-    console.log("email", email)
-    console.log("password", password)
     try {
         await connectMongoDB();
         const createdUser = await User.create(userDetails);
