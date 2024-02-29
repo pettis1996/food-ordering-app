@@ -22,7 +22,7 @@ input[type="text"]:disabled {
 
 button {
   @apply block w-full text-gray-700 font-semibold;
-  @apply border border-gray-300 rounded-md px-6 py-2 hover:bg-gray-700 hover:text-white;
+  @apply border border-gray-300 rounded-md px-6 py-2 hover:border-gray-700;
 }
 
 button[type="submit"], .submit {
