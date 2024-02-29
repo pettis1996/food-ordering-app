@@ -22,6 +22,7 @@ export default function RegisterPage() {
         });
         if (!res.ok) {
             console.log(res.status);
+            setCreatingUser(false);
             return null;
         }
         setUserCreated(true);
@@ -51,8 +52,8 @@ export default function RegisterPage() {
                         <h6 className="text-sm">User Created Successfully!</h6>
                     </div>
                 ): null}
-                <input required type="email" placeholder="email" value={email} onChange={ev => setEmail(ev.target.value)} />
-                <input required type="password" placeholder="password" value={password} onChange={ev => setPassword(ev.target.value)} />
+                <input required disabled={creatingUser} type="email" placeholder="email" value={email} onChange={ev => setEmail(ev.target.value)} />
+                <input required disabled={creatingUser} type="password" placeholder="password" value={password} onChange={ev => setPassword(ev.target.value)} />
                 <button type="submit">Create Account</button>
                 <div className="border-b border-gray-300 text-center text-gray-500 my-4">or login with provider</div>
                 <button className="flex gap-4 justify-center">
