@@ -17,7 +17,7 @@ export default function LoginPage() {
         setError(false);
         setAuthenticating(true);
         
-        await signIn("credentials", {email, password, callbackUrl: '/'});
+        await signIn("credentials", {email, password, callbackUrl: "/"});
 
         setAuthenticating(false);
     };
@@ -34,7 +34,7 @@ export default function LoginPage() {
                 <button className="w-full" disabled={authenticating} type="submit">Login</button>
                 <div className="border-b border-gray-300 text-center text-gray-500 my-4 text-sm">or Login with Provider</div>
                 <div className="flex flex-col gap-3">
-                    <button disabled={authenticating} onClick={() => signIn("google")} className="flex gap-4 justify-center w-full">
+                    <button disabled={authenticating} onClick={() => signIn("google", {callbackUrl: "/"})} className="flex gap-4 justify-center w-full">
                         <Image src={"/google.png"} width={24} height={24} alt={"Google"} />
                         Login with Google
                     </button>

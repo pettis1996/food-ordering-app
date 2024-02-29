@@ -51,7 +51,7 @@ export default function RegisterPage() {
                 <button disabled={creatingUser} type="submit" className="w-full">Create Account</button>
                 <div className="border-b border-gray-300 text-center text-gray-500 my-4 text-sm">or Login with Provider</div>
                 <div className="flex flex-col gap-3">
-                    <button disabled={creatingUser} className="flex gap-4 justify-center w-full">
+                    <button disabled={creatingUser} onClick={() => signIn("google", {callbackUrl: "/"})} className="flex gap-4 justify-center w-full">
                         <Image src={"/google.png"} width={24} height={24} alt={"Google"} />
                         Login with Google
                     </button>
