@@ -11,13 +11,13 @@ export default function RegisterPage() {
     const [password, setPassword] = useState("");
     const [creatingUser, setCreatingUser] = useState(false);
     const [userCreated, setUserCreated] = useState(false);
-    const [userExists, setUserExists] = useState(false);
+    const [error, setError] = useState(false);
 
     async function handleFormSubmit(ev) {
         ev.preventDefault();
-        setCreatingUser(true);
         setUserCreated(false);
-        setUserExists(false);
+        setError(false);
+        setCreatingUser(true);
         const res = await fetch("/api/register", {
             method: "POST",
             body: JSON.stringify({email, password}),
@@ -26,8 +26,8 @@ export default function RegisterPage() {
         if (!res.ok) {
             console.log(res.statusText);
             setCreatingUser(false);
-            setUserExists(true);
-            return;
+            setError(true);
+            return null;
         }
         setUserCreated(true);
         setTimeout(() => {
@@ -43,7 +43,7 @@ export default function RegisterPage() {
                 {userCreated && (
                     <Alert type="success" smallText="User Created Successfully!" exSmallText="Please wait to be redirected to homepage." />
                 )}
-                {userExists && (
+                {error && (
                     <Alert type="error" smallText="Error Registering User!" exSmallText="Please try again using a different email address." />
                 )}
                 <input required disabled={creatingUser} type="email" placeholder="email" value={email} onChange={ev => setEmail(ev.target.value)} />
