@@ -21,7 +21,7 @@ export default function Hero() {
                 </div>
             </div>
             <div className="relative">
-                <Image src={"/pizza.png"} layout={"fill"} objectFit={"contain"} alt={"Pizza"} />
+                <Image priority style={{ objectFit: "contain" }} src={"/pizza.png"} sizes="500px" fill alt={"Pizza"} />
             </div>
         </section>
     );

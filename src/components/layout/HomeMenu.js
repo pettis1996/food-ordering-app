@@ -1,4 +1,3 @@
-import Image from "next/image"
 import MenuItem from "../menu/MenuItem";
 import SectionHeader from "./SectionHeader";
 
