@@ -20,7 +20,7 @@ export default function Header() {
             <nav className="flex items-center gap-4 text-gray-500 font-semibold">
                 {sessionStatus === "authenticated" ? (
                     <>
-                        Welcome back, {userEmail}
+                        {userEmail}
                         <button className="bg-primary border-0 text-white rounded-full px-8 py-2" onClick={() => signOut()}>Logout</button>
                     </>
                 ): (
