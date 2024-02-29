@@ -21,7 +21,7 @@ export default function Header() {
                 {sessionStatus === "authenticated" ? (
                     <>
                         Welcome back, {userEmail}
-                        <button className="bg-primary text-white rounded-full px-8 py-2" onClick={() => signOut()}>Logout</button>
+                        <button className="bg-primary border-0 text-white rounded-full px-8 py-2" onClick={() => signOut()}>Logout</button>
                     </>
                 ): (
                     <>
