@@ -46,16 +46,16 @@ export default function RegisterPage() {
                 {error && (
                     <Alert type="error" smallText="Error Registering User!" exSmallText="Please try again using a different email address." />
                 )}
-                <input required disabled={creatingUser} type="email" placeholder="email" value={email} onChange={ev => setEmail(ev.target.value)} />
-                <input required disabled={creatingUser} type="password" placeholder="password" value={password} onChange={ev => setPassword(ev.target.value)} />
-                <button disabled={creatingUser} type="submit">Create Account</button>
+                <input disabled={creatingUser} type="email" placeholder="email" value={email} onChange={ev => setEmail(ev.target.value)} />
+                <input disabled={creatingUser} type="password" placeholder="password" value={password} onChange={ev => setPassword(ev.target.value)} />
+                <button disabled={creatingUser} type="submit" className="w-full">Create Account</button>
                 <div className="border-b border-gray-300 text-center text-gray-500 my-4 text-sm">or Login with Provider</div>
                 <div className="flex flex-col gap-3">
-                    <button className="flex gap-4 justify-center">
+                    <button disabled={creatingUser} onClick={() => signIn("google", {callbackUrl: "/"})} className="flex gap-4 justify-center w-full">
                         <Image src={"/google.png"} width={24} height={24} alt={"Google"} />
                         Login with Google
                     </button>
-                    <button className="flex gap-4 justify-center">
+                    <button disabled className="flex gap-4 justify-center w-full">
                         <Image src={"/github.png"} width={24} height={24} alt={"GitHub"} />
                         Login with GitHub
                     </button>

@@ -1,5 +1,4 @@
 "use client"
-import { useRouter } from 'next/navigation'
 import {signIn} from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
@@ -18,7 +17,7 @@ export default function LoginPage() {
         setError(false);
         setAuthenticating(true);
         
-        await signIn("credentials", {email, password, callbackUrl: '/'});
+        await signIn("credentials", {email, password, callbackUrl: "/"});
 
         setAuthenticating(false);
     };
@@ -30,16 +29,16 @@ export default function LoginPage() {
                 {error && (
                     <Alert type="error" smallText="Oops, An error occured!" exSmallText="Please try again." />
                 )}
-                <input required disabled={authenticating} name="email" type="email" placeholder="email" value={email} onChange={ev => setEmail(ev.target.value)} />
-                <input required disabled={authenticating} name="password" type="password" placeholder="password" value={password} onChange={ev => setPassword(ev.target.value)} />
-                <button disabled={authenticating} type="submit">Login</button>
+                <input disabled={authenticating} name="email" type="email" placeholder="email" value={email} onChange={ev => setEmail(ev.target.value)} />
+                <input disabled={authenticating} name="password" type="password" placeholder="password" value={password} onChange={ev => setPassword(ev.target.value)} />
+                <button className="w-full" disabled={authenticating} type="submit">Login</button>
                 <div className="border-b border-gray-300 text-center text-gray-500 my-4 text-sm">or Login with Provider</div>
                 <div className="flex flex-col gap-3">
-                    <button disabled={authenticating} className="flex gap-4 justify-center">
+                    <button disabled={authenticating} onClick={() => signIn("google", {callbackUrl: "/"})} className="flex gap-4 justify-center w-full">
                         <Image src={"/google.png"} width={24} height={24} alt={"Google"} />
                         Login with Google
                     </button>
-                    <button disabled={authenticating} className="flex gap-4 justify-center">
+                    <button disabled className="flex gap-4 justify-center w-full">
                         <Image src={"/github.png"} width={24} height={24} alt={"GitHub"} />
                         Login with GitHub
                     </button>
