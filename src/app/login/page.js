@@ -1,5 +1,6 @@
 "use client"
 import { useRouter } from 'next/navigation'
+import {signIn} from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
 import Alert from "@/components/layout/Alert"
@@ -16,19 +17,10 @@ export default function LoginPage() {
         ev.preventDefault();
         setError(false);
         setAuthenticating(true);
-        const res = await fetch("/api/login", {
-            method: "POST",
-            body: JSON.stringify({email, password}),
-            headers: {"Content-Type": "application/json"}
-        });
-        if (!res.ok) {
-            setError(true);
-            return null;
-        }
+        
+        await signIn("credentials", {email, password, callbackUrl: '/'});
+
         setAuthenticating(false);
-        setTimeout(() => {
-            router.push("/");
-        }, 1750);
     };
 
     return (
@@ -38,8 +30,8 @@ export default function LoginPage() {
                 {error && (
                     <Alert type="error" smallText="Oops, An error occured!" exSmallText="Please try again." />
                 )}
-                <input required disabled={authenticating} type="email" placeholder="email" value={email} onChange={ev => setEmail(ev.target.value)} />
-                <input required disabled={authenticating} type="password" placeholder="password" value={password} onChange={ev => setPassword(ev.target.value)} />
+                <input required disabled={authenticating} name="email" type="email" placeholder="email" value={email} onChange={ev => setEmail(ev.target.value)} />
+                <input required disabled={authenticating} name="password" type="password" placeholder="password" value={password} onChange={ev => setPassword(ev.target.value)} />
                 <button disabled={authenticating} type="submit">Login</button>
                 <div className="border-b border-gray-300 text-center text-gray-500 my-4 text-sm">or Login with Provider</div>
                 <div className="flex flex-col gap-3">
