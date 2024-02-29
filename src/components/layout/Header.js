@@ -1,6 +1,7 @@
 "use client"
 import { useSession } from "next-auth/react";
 import Link from "next/link"
+import {signOut} from "next-auth/react";
 
 export default function Header() {
     const session = useSession();
@@ -20,7 +21,7 @@ export default function Header() {
                 {sessionStatus === "authenticated" ? (
                     <>
                         Welcome back, {userEmail}
-                        <Link href={'/logout'} className="bg-primary text-white rounded-full px-8 py-2">Logout</Link>
+                        <button className="bg-primary text-white rounded-full px-8 py-2" onClick={() => signOut()}>Logout</button>
                     </>
                 ): (
                     <>
