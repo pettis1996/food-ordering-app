@@ -44,7 +44,7 @@ export default function LoginPage() {
                         Login with GitHub
                     </button>
                 </div>
-                <div className="border-t border-gray-300 text-center text-gray-500 my-4 pt-4">Don't have an account? <Link className="underline text-gray-900" href={"/register"}>Register</Link></div>
+                <div className="border-t border-gray-300 text-center text-gray-500 my-4 pt-4">Don&apos;t have an account? <Link className="underline text-gray-900" href={"/register"}>Register</Link></div>
             </form>
         </section>
     );
