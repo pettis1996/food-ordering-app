@@ -1,17 +1,25 @@
 "use client"
-import { useRouter } from 'next/navigation'
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
-import Alert from "@/components/layout/Alert"
-import Link from "next/link"
+import Alert from "@/components/layout/Alert";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 export default function RegisterPage() {
     const router = useRouter();
+    const session = useSession();
+    const sessionStatus = session?.status;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [creatingUser, setCreatingUser] = useState(false);
     const [userCreated, setUserCreated] = useState(false);
     const [error, setError] = useState(false);
+
+    if (sessionStatus === "authenticated") {
+        router.push("/");
+        return null;
+    }
 
     async function handleFormSubmit(ev) {
         ev.preventDefault();

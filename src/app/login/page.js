@@ -1,16 +1,26 @@
 "use client"
+import { useRouter } from "next/navigation";
 import {signIn} from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
-import Alert from "@/components/layout/Alert"
-import Link from "next/link"
+import Alert from "@/components/layout/Alert";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 
 export default function LoginPage() {
+    const router = useRouter();
+    const session = useSession();
+    const sessionStatus = session?.status;
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [authenticating, setAuthenticating] = useState(false);
     const [error, setError] = useState(false);
+
+    if (sessionStatus === "authenticated") {
+        router.push("/");
+        return null;
+    }
 
     async function handleFormSubmit(ev) {
         ev.preventDefault();
