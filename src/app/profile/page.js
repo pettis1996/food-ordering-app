@@ -14,6 +14,7 @@ export default function ProfilePage() {
     const userEmail = userData?.email;
     let userName = userData?.name ?? userEmail;
     const userImage = userData?.image ?? "";
+    const [editingEnabled, setEditingEnabled] = useState(false);
     if (sessionStatus && sessionStatus === "loading") { 
         return <h1 className="mt-8 text-center text-primary text-4xl">Loading...</h1>
     }
@@ -31,17 +32,20 @@ export default function ProfilePage() {
                     <div className="grow">
                         <div className="mb-4">
                             <label for="user-name">Full Name:</label>
-                            <input disabled id="user-name" type="text" placeholder={userName} />
+                            <input disabled={!editingEnabled} id="user-name" type="text" placeholder={userName} />
                         </div>
                         <div className="my-4">
                             <label for="user-email">Email Address:</label>
-                            <input disabled id="user-email" type="email" placeholder={userEmail} />
+                            <input disabled={!editingEnabled} id="user-email" type="email" placeholder={userEmail} />
                         </div>
                         <div className="my-4">
                             <label for="user-password">Password:</label>
-                            <input disabled id="user-password" type="password" placeholder="******" />
+                            <input disabled={!editingEnabled} id="user-password" type="password" placeholder="******" />
                         </div>
-                        <button className="w-full mt-6" type="submit">Save</button>
+                        <div className="flex w-full mt-6">
+                            <button onClick={() => editingEnabled === true ? setEditingEnabled(false) : setEditingEnabled(true)} type="button">Edit</button>
+                            <button disabled={!editingEnabled} type="submit">Save</button>
+                        </div>
                     </div>
                 </div>
             </form>
