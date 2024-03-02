@@ -22,7 +22,6 @@ export default function Alert(props) {
     if (!IconComponent) {
         return null; 
     }
-
     return (
         <div className={`bg-${type === "success" ? "green" : "red"}-300/50 rounded-md p-5 font-semibold text-center my-5 flex flex-col justify-center items-center gap-3`}>
             {IconComponent}

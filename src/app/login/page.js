@@ -7,7 +7,6 @@ import Alert from "@/components/layout/Alert";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
-
 export default function LoginPage() {
     const router = useRouter();
     const session = useSession();
@@ -21,7 +20,7 @@ export default function LoginPage() {
         router.push("/");
         return null;
     }
-
+    
     async function handleFormSubmit(ev) {
         ev.preventDefault();
         setError(false);
@@ -31,7 +30,6 @@ export default function LoginPage() {
 
         setAuthenticating(false);
     };
-
     return (
         <section className="mt-8">
             <h1 className="text-center text-primary text-4xl">Login</h1>

@@ -43,7 +43,6 @@ export default function RegisterPage() {
             router.push("/");
         }, 1750);
     };
-
     return (
         <section className="mt-8">
             <h1 className="text-center text-primary text-4xl">Register</h1>
@@ -57,7 +56,7 @@ export default function RegisterPage() {
                 <input disabled={creatingUser} type="email" placeholder="email" value={email} onChange={ev => setEmail(ev.target.value)} />
                 <input disabled={creatingUser} type="password" placeholder="password" value={password} onChange={ev => setPassword(ev.target.value)} />
                 <button disabled={creatingUser} type="submit" className="w-full">Create Account</button>
-                <div className="border-b border-gray-300 text-center text-gray-500 my-4 text-sm">or Login with Provider</div>
+                <div className="border-b border-gray-300 text-center text-gray-500 my-4 text-sm">or Login/Register with Provider</div>
                 <div className="flex flex-col gap-3">
                     <button disabled={creatingUser} onClick={() => signIn("google", {callbackUrl: "/"})} className="flex gap-4 justify-center w-full">
                         <Image src={"/google.png"} width={24} height={24} alt={"Google"} />
