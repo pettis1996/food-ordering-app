@@ -1,6 +1,5 @@
 "use client"
 import { redirect, useRouter } from "next/navigation";
-import {signIn} from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
 import Alert from "@/components/layout/Alert";
@@ -41,6 +40,14 @@ export default function ProfilePage() {
                         <div className="my-4">
                             <label for="user-password">Password:</label>
                             <input disabled={!editingEnabled} id="user-password" type="password" placeholder="******" />
+                        </div>
+                        <div className="mb-4">
+                            <label for="user-home-address">Full Address:</label>
+                            <input disabled={!editingEnabled} id="user-home-address" type="text" placeholder="154 Example Street, 10234" />
+                        </div>
+                        <div className="mb-4">
+                            <label for="user-phone">Phone Number:</label>
+                            <input disabled={!editingEnabled} id="user-phone" type="text" placeholder="+ 357 99 123 123" />
                         </div>
                         <div className="flex w-full mt-6">
                             <button onClick={() => editingEnabled === true ? setEditingEnabled(false) : setEditingEnabled(true)} type="button">Edit</button>
