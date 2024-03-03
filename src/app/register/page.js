@@ -5,6 +5,7 @@ import { useState } from "react";
 import Alert from "@/components/layout/Alert";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 
 export default function RegisterPage() {
     const router = useRouter();

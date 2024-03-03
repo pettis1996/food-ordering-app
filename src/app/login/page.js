@@ -1,5 +1,5 @@
 "use client"
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import {signIn} from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
@@ -20,13 +20,22 @@ export default function LoginPage() {
         router.push("/");
         return null;
     }
-    
+
+    // TODO: Fix authentication with db accounts
+
     async function handleFormSubmit(ev) {
         ev.preventDefault();
         setError(false);
         setAuthenticating(true);
         
-        await signIn("credentials", {email, password, callbackUrl: "/"});
+        const result = await signIn("credentials", {email, password, callbackUrl: "/", redirect: false});
+
+        if (result?.error) {
+            console.error("Authentication error:", result.error);
+            setError(true);
+        } else if (result?.ok) {
+            router.push(result.url || "/");
+        }
 
         setAuthenticating(false);
     };
