@@ -2,7 +2,6 @@
 import { redirect, useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 
 export default function ProfilePage() {

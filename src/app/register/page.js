@@ -15,8 +15,6 @@ export default function RegisterPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [creatingUser, setCreatingUser] = useState(false);
-    const [userCreated, setUserCreated] = useState(false);
-    const [error, setError] = useState(false);
 
     if (sessionStatus === "authenticated") {
         router.push("/");
@@ -25,8 +23,6 @@ export default function RegisterPage() {
 
     async function handleFormSubmit(ev) {
         ev.preventDefault();
-        setUserCreated(false);
-        setError(false);
         setCreatingUser(true);
         const res = await fetch("/api/register", {
             method: "POST",
@@ -45,10 +41,8 @@ export default function RegisterPage() {
                 theme: "light",
             });
             setCreatingUser(false);
-            setError(true);
             return null;
         }
-        setUserCreated(true);
         toast.success("Account registered successfully!", {
             position: "top-right",
             autoClose: 3000,
@@ -61,7 +55,7 @@ export default function RegisterPage() {
         setTimeout(() => {
             setCreatingUser(false);
             router.push("/");
-        }, 1750);
+        }, 3000);
     };
     return (
         <section className="mt-8">
