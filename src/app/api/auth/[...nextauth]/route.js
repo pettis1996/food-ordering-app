@@ -10,6 +10,10 @@ import clientPromise from "@/libs/mongoConnect";
 export const authOptions = {
   secret: process.env.SECRET,
   adapter: MongoDBAdapter(clientPromise),
+  session: { strategy: "jwt" },
+  pages: {
+    singIn: "/login"
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,

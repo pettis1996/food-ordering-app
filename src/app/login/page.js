@@ -21,8 +21,6 @@ export default function LoginPage() {
         return null;
     }
 
-    // TODO: Fix authentication with db accounts
-
     async function handleFormSubmit(ev) {
         ev.preventDefault();
         setError(false);
