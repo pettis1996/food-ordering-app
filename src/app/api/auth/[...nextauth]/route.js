@@ -29,18 +29,12 @@ export const authOptions = {
       async authorize(credentials, req) {
         const email = credentials?.email;
         const password = credentials?.password;
-
         connectMongoDB();
-        
         const user = await User.findOne({email});
         const passwordOk = user && bcrypt.compareSync(password, user.password);
         if (passwordOk) {
-          return Promise.resolve({
-              status: "authenticated",
-              user: user,
-          });
+          return user;
         }
-
         return null;
       }
     })

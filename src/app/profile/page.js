@@ -13,9 +13,9 @@ export default function ProfilePage() {
     const [userImage, setUserImage] = useState(userData?.image);
     const [editingEnabled, setEditingEnabled] = useState(false);
     useEffect(() => {
-        setUserEmail(userData?.email || '');
-        setUserName(userData?.name || '');
-        setUserImage(userData?.image || '');
+        setUserEmail(userData?.email || "");
+        setUserName(userData?.name || "");
+        setUserImage(userData?.image || "");
     }, [userData]);
     if (sessionStatus && sessionStatus === "loading") { 
         return <h1 className="mt-8 text-center text-primary text-4xl">Loading...</h1>
