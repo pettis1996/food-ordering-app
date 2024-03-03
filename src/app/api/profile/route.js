@@ -11,7 +11,7 @@ export async function PUT(req) {
     const res = await User.updateOne({email}, {name:data.name, email:data.email});
     if (!res) {
         return Response.json(
-            { message: "Not Implemented Route" },
+            { message: "Error: Unable to update data." },
             { status: 500 }
         );
     }
