@@ -1,11 +1,12 @@
 "use client"
-import { redirect, useRouter } from "next/navigation";
-import {signIn} from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
-import Alert from "@/components/layout/Alert";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function LoginPage() {
     const router = useRouter();
@@ -29,11 +30,17 @@ export default function LoginPage() {
         const result = await signIn("credentials", {email, password, callbackUrl: "/", redirect: false});
 
         if (result?.error) {
-            console.error("Authentication error:", result.error);
+            toast.error(`Authentication error: ${result.error}`, {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            });
             setError(true);
-        } else if (result?.ok) {
-            router.push(result.url || "/");
-        }
+        } 
 
         setAuthenticating(false);
     };
@@ -41,9 +48,6 @@ export default function LoginPage() {
         <section className="mt-8">
             <h1 className="text-center text-primary text-4xl">Login</h1>
             <form className="block max-w-xs mx-auto" onSubmit={handleFormSubmit}>
-                {error && (
-                    <Alert type="error" smallText="Oops, An error occured!" exSmallText="Please try again." />
-                )}
                 <input disabled={authenticating} name="email" type="email" placeholder="email" value={email} onChange={ev => setEmail(ev.target.value)} />
                 <input disabled={authenticating} name="password" type="password" placeholder="password" value={password} onChange={ev => setPassword(ev.target.value)} />
                 <button className="w-full" disabled={authenticating} type="submit">Login</button>
@@ -60,6 +64,7 @@ export default function LoginPage() {
                 </div>
                 <div className="border-t border-gray-300 text-center text-gray-500 my-4 pt-4">Don&apos;t have an account? <Link className="underline text-gray-900" href={"/register"}>Register</Link></div>
             </form>
+            <ToastContainer />
         </section>
     );
 }

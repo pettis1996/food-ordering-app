@@ -2,7 +2,6 @@
 import { redirect, useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import Alert from "@/components/layout/Alert";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 
