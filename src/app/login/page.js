@@ -1,5 +1,5 @@
 "use client"
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
@@ -18,8 +18,7 @@ export default function LoginPage() {
     const [error, setError] = useState(false);
 
     if (sessionStatus === "authenticated") {
-        router.push("/");
-        return null;
+        redirect("/");
     }
 
     async function handleFormSubmit(ev) {

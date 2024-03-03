@@ -3,7 +3,7 @@ import { connectMongoDB } from "../../../../lib/mongodb";
 
 export async function POST(req) {
     const { email, password } = await req.json();
-    const userDetails = { email, password }
+    const userDetails = { email, password };
     try {
         await connectMongoDB();
         const createdUser = await User.create(userDetails);
