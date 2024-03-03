@@ -1,13 +1,16 @@
 "use client"
 import { useSession } from "next-auth/react";
 import Link from "next/link"
-import {signOut} from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 export default function Header() {
     const session = useSession();
     const sessionStatus = session?.status;
     const userData = session?.data?.user;
-    const userEmail = userData?.email;
+    let userName = userData?.name || userData?.email;
+    if (userName && userName.includes(" ")) {
+        userName = userName.split(" ")[0];
+    }
     return (
         <header className="flex items-center justify-between">
             <nav className="flex items-center gap-8 text-gray-500 font-semibold">
@@ -20,7 +23,7 @@ export default function Header() {
             <nav className="flex items-center gap-4 text-gray-500 font-semibold">
                 {sessionStatus === "authenticated" ? (
                     <>
-                        <Link href={"/profile"}>{userEmail}</Link>
+                        <Link href={"/profile"}>{userName}</Link>
                         <button className="bg-primary border-0 text-white rounded-full px-8 py-2" onClick={() => signOut()}>Logout</button>
                     </>
                 ): (

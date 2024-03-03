@@ -2,9 +2,11 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState } from "react";
-import Alert from "@/components/layout/Alert";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function RegisterPage() {
     const router = useRouter();
@@ -13,8 +15,6 @@ export default function RegisterPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [creatingUser, setCreatingUser] = useState(false);
-    const [userCreated, setUserCreated] = useState(false);
-    const [error, setError] = useState(false);
 
     if (sessionStatus === "authenticated") {
         router.push("/");
@@ -23,8 +23,6 @@ export default function RegisterPage() {
 
     async function handleFormSubmit(ev) {
         ev.preventDefault();
-        setUserCreated(false);
-        setError(false);
         setCreatingUser(true);
         const res = await fetch("/api/register", {
             method: "POST",
@@ -33,26 +31,36 @@ export default function RegisterPage() {
         });
         if (!res.ok) {
             console.log(res.statusText);
+            toast.error("Oops an error occured, please try again later", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            });
             setCreatingUser(false);
-            setError(true);
             return null;
         }
-        setUserCreated(true);
+        toast.success("Account registered successfully!", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "light",
+        });
         setTimeout(() => {
             setCreatingUser(false);
             router.push("/");
-        }, 1750);
+        }, 3000);
     };
     return (
         <section className="mt-8">
             <h1 className="text-center text-primary text-4xl">Register</h1>
             <form className="block max-w-xs mx-auto" onSubmit={handleFormSubmit}>
-                {userCreated && (
-                    <Alert type="success" smallText="User Created Successfully!" exSmallText="Please wait to be redirected to homepage." />
-                )}
-                {error && (
-                    <Alert type="error" smallText="Error Registering User!" exSmallText="Please try again using a different email address." />
-                )}
                 <input disabled={creatingUser} type="email" placeholder="email" value={email} onChange={ev => setEmail(ev.target.value)} />
                 <input disabled={creatingUser} type="password" placeholder="password" value={password} onChange={ev => setPassword(ev.target.value)} />
                 <button disabled={creatingUser} type="submit" className="w-full">Create Account</button>
@@ -69,6 +77,7 @@ export default function RegisterPage() {
                 </div>
                 <div className="border-t border-gray-300 text-center text-gray-500 my-4 pt-4">Already have an account? <Link className="underline text-gray-900" href={"/login"}>Login</Link></div>
             </form>
+            <ToastContainer />
         </section>
     );
 }
