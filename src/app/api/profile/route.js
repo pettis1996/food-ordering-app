@@ -8,10 +8,15 @@ export async function PUT(req) {
     const data = await req.json();
     const session = await getServerSession(authOptions);
     const email = session?.user?.email;
-    const user = await User.findOne({email});
-
+    const res = await User.updateOne({email}, {name:data.name, email:data.email});
+    if (!res) {
+        return Response.json(
+            { message: "Not Implemented Route" },
+            { status: 500 }
+        );
+    }
     return Response.json(
-        { message: "Not Implemented Route" },
-        { status: 500 }
+        { message: "User info updated successfully!" },
+        { status: 200 }
     );
 }   

@@ -2,37 +2,40 @@
 import { redirect, useRouter } from "next/navigation";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 export default function ProfilePage() {
     const session = useSession();
     const sessionStatus = session?.status;
     const userData = session?.data?.user;
+    const router = useRouter();
     const [userEmail, setUserEmail] = useState(userData?.email);
     const [userName, setUserName] = useState(userData?.name);
     const [userImage, setUserImage] = useState(userData?.image);
     const [editingEnabled, setEditingEnabled] = useState(false);
     useEffect(() => {
-        setUserEmail(userData?.email || "");
-        setUserName(userData?.name || "");
-        setUserImage(userData?.image || "");
-    }, [userData]);
+        if (sessionStatus === "authenticated") {
+            setUserEmail(userData?.email || "");
+            setUserName(userData?.name || "");
+            setUserImage(userData?.image || "");
+        }
+    }, [session, sessionStatus, userData]);
     if (sessionStatus && sessionStatus === "loading") { 
         return <h1 className="mt-8 text-center text-primary text-4xl">Loading...</h1>
     };
     if (sessionStatus && sessionStatus === "unauthenticated") { 
         redirect("/login");
     };
-    
     async function handleProfileInfoUpdate (event) {
         event.preventDefault();
-        console.log("email", userEmail)
-        console.log("name", userName)
         const res = await fetch("/api/profile", {
             method: "PUT",
             body: JSON.stringify({ email: userEmail, name: userName }),
             headers: {"Content-Type": "application/json"}
         });
+        if (res.ok) { 
+            signOut();
+        }
     };     
     return (
         <section className="mt-8">
